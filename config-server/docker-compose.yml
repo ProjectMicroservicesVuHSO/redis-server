@@ -1,0 +1,18 @@
+services:
+  config-server:
+    container_name: config-server
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    image: config-server
+    environment:
+      - SPRING_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+      - SPRING_APPLICATION_NAME=config-server
+    ports:
+      - "8762:8762"
+    networks:
+      - vuhso-microservices
+networks:
+    vuhso-microservices:
+        external: true
